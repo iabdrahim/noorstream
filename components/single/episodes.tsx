@@ -6,6 +6,7 @@ import { useContext, useState } from "react";
 import { MdArrowDropDown } from "react-icons/md";
 import { providerContext } from "@/context/providers";
 import Player from "../ui/player";
+import Link from "next/link";
 export default function Episodes({
   seasons,
   episodesDefault,
@@ -15,7 +16,7 @@ export default function Episodes({
 }) {
   let [drop, setDrop] = useState(false);
   let [episodes, setEpisodes] = useState(episodesDefault);
-  let [seasonName, setSeasonN] = useState("");
+  let [seasonName, setSeasonN] = useState("المواسم");
   let { provider } = useContext(providerContext);
   let [watchPop, setWatchPop] = useState(false);
   let [watchPopSevers, setWatchServers] = useState<string[] | null>(null);
@@ -34,6 +35,18 @@ export default function Episodes({
     let data = await new provider.class().loadEpisode(ep.url);
     setWatchServers(data?.watchServersList || null);
   };
+  let [DownloadList, setDownList] = useState<
+    | {
+        resolution: string;
+        url: string;
+      }[]
+    | null
+  >(null);
+  let handleDownload = async (ep: { name: string; url: string }) => {
+    setDrop(true);
+    let data = await new provider.class().loadEpisode(ep.url);
+    setDownList(data?.downloadList || null);
+  };
   return (
     <div className="episodes mt-10 gap-4 flex flex-col">
       <h2 className="w-full text-xl font-bold">الحلقات:</h2>
@@ -42,7 +55,7 @@ export default function Episodes({
         onClick={() => setDrop(!drop)}
       >
         <MdArrowDropDown />
-        سرفرات المشاهدة
+        {seasonName}
         {drop && (
           <div className="servers absolute top-11 left-2/4 -translate-x-2/4 flex border bg-[#0d0d0d] border-[#222] rounded-xl gap-2 p-2 flex-col w-64 ">
             {seasons?.map((s, i) => (
@@ -67,14 +80,35 @@ export default function Episodes({
             key={i}
             className="ep bg-[#181818] hover:bg-[#282828] flex justify-between font-futura rounded-md px-4 py-3 font-semibold w-full max-w-lg"
           >
-            {i + 1}. {ep.name}
+            {ep.name}
             <div className="actions flex gap-6 items-center">
               <FaCirclePlay
                 className="text-white cursor-pointer"
                 size={22}
                 onClick={() => handleWatch(ep)}
               />
-              <FiDownload size={22} className="cursor-pointer" />
+              <button
+                className="relative drop font-semibold flex gap-2 items-center"
+                onClick={() => setDrop(!drop)}
+              >
+                <FiDownload size={22} className="cursor-pointer" />
+
+                {drop && (
+                  <div className="servers absolute bottom-11 left-2/4 -translate-x-2/4 flex border bg-[#0d0d0d] border-[#222] rounded-xl gap-2 p-2 flex-col w-64 ">
+                    {DownloadList?.map((d, i) => (
+                      <a href={d.url} key={i}>
+                        <button
+                          dir="auto"
+                          className={`w-full p-2 text-left rounded-lg hover:bg-[#222]`}
+                          onClick={() => handleDownload(ep)}
+                        >
+                          {d.resolution}
+                        </button>
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </button>
             </div>
           </div>
         ))}
