@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { FaPlay } from "react-icons/fa6";
 import { FiDownload } from "react-icons/fi";
-import { MdArrowDropDown, MdClose } from "react-icons/md";
 import Player from "../ui/player";
 import { IDownLoad } from "@/utils/providers/list";
 
@@ -27,15 +26,15 @@ export default function Watch({
         مشاهدة
       </button>
       <button
-        className="load w-48 justify-center bg-[#0D0D0D] py-3 font-semibold rounded-md flex items-center gap-2"
+        className="load w-48 justify-center relative bg-[#0D0D0D] py-3 font-semibold rounded-md flex items-center gap-2"
         onClick={() => setDrop(!drop)}
       >
         <FiDownload size={20} />
         تحميل
         {drop && (
-          <div className="servers absolute bottom-11 left-2/4 -translate-x-2/4 flex border bg-[#0d0d0d] border-[#222] rounded-xl gap-2 p-2 flex-col w-64 ">
+          <div className="servers z-10 absolute bottom-11 left-2/4 -translate-x-2/4 flex border bg-[#0d0d0d] border-[#222] rounded-xl gap-2 p-2 flex-col w-64 ">
             {downloadList?.map((d, i) => (
-              <a href={d.url} key={i}>
+              <a href={d.url} key={i} target="_blank">
                 <button
                   dir="auto"
                   key={i}

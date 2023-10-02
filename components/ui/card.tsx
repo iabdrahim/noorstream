@@ -15,9 +15,18 @@ let Card = ({ card }: { card: ICard }) => {
         alt=""
         className="w-full h-full -z-10 absolute left-0 top-0 object-cover"
       />
-      <div className="text flex justify-between items-start w-full" dir="auto">
-        <div className="flex flex-col">
-          <Link href={card.url.replace("/watch", "").split("/").join("||")}>
+      <div
+        className="text flex justify-between items-start gap-2 w-full"
+        dir="auto"
+      >
+        <div className="flex flex-col w-full">
+          <Link
+            href={card.url
+              .replace("/watch", "")
+              .split("/")
+              .slice(2, -1)
+              .join("/")}
+          >
             <h3
               className={`${tajawal.className} text-lg font-bold text-ellipsis max-w-full`}
             >
@@ -30,7 +39,9 @@ let Card = ({ card }: { card: ICard }) => {
         <Link
           href={card.url
             .replace("/watch", "")
-            .replace(new provider.class().mainUrl, "/watch")}
+            .split("/")
+            .slice(2, -1)
+            .join("/")}
         >
           <div className="w-11 cursor-pointer flex justify-center items-center h-11 bg-white rounded-full border text-black min-w-fit">
             <BiPlay size={27} />
