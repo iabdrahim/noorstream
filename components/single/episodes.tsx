@@ -83,7 +83,7 @@ export default function Episodes({
             {dropDS && (
               <div className="servers absolute top-11 z-10 left-2/4 -translate-x-2/4 flex border bg-[#0d0d0d] border-[#222] rounded-xl gap-2 p-2 flex-col w-64 ">
                 {DownloadSeason?.map((s, i) => (
-                  <a href={s.url} target="_blank">
+                  <a href={s.url} target="_blank" key={i}>
                     <button
                       dir="auto"
                       key={i}
