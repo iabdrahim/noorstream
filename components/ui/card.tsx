@@ -20,12 +20,7 @@ let Card = ({ card }: { card: ICard }) => {
         dir="auto"
       >
         <div className="flex flex-col w-full">
-          <Link
-            href={
-              "/w" +
-              card.url.replace("/watch", "").split("/").slice(3, -1).join("/")
-            }
-          >
+          <Link href={"/w/" + card.url.split("/").slice(3, -1).join("/")}>
             <h3
               className={`${tajawal.className} text-lg font-bold text-ellipsis max-w-full`}
             >
@@ -35,7 +30,7 @@ let Card = ({ card }: { card: ICard }) => {
 
           <p className="text-neutral-100 font-futura text-xs">({card.year})</p>
         </div>
-        <Link href={"/w" + card.url.split("/").slice(3, -1).join("/")}>
+        <Link href={"/w/" + card.url.split("/").slice(3, -1).join("/")}>
           <div className="w-11 cursor-pointer flex justify-center items-center h-11 bg-white rounded-full border text-black min-w-fit">
             <BiPlay size={27} />
           </div>

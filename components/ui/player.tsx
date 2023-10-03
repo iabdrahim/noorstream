@@ -56,7 +56,7 @@ export default function Player({
               </div>
             )}
           </button>
-          <div className="video w-full h-full max-md:max-h-[30vh] rounded-xl bg-red-400 ">
+          <div className="video w-full h-full max-md:max-h-[30vh] rounded-xl bg-[#222] ">
             <iframe src={servers[iframeInx]} className="w-full h-full"></iframe>
           </div>
         </div>

@@ -1,6 +1,12 @@
 "use client";
 
-export default function Spinner() {
+export default function Spinner({
+  width,
+  height,
+}: {
+  width?: string;
+  height?: string;
+}) {
   return (
     <div
       role="status"
@@ -9,7 +15,9 @@ export default function Spinner() {
     >
       <svg
         aria-hidden="true"
-        className="w-8 h-8 mr-2 text-gray-200 animate-spin fill-purple-400"
+        width={width || "32px"}
+        height={height || "32px"}
+        className="text-gray-700 animate-spin fill-purple-400"
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

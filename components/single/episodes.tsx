@@ -101,9 +101,7 @@ export default function Episodes({
       </div>
       <h2 className="w-full text-xl font-bold">الحلقات:</h2>
       <div className="flex gap-4 mt-2 w-full flex-col">
-        {episodes?.reverse().map((ep, i) => (
-          <Episode ep={ep} key={i} />
-        ))}
+        {episodes && episodes.map((ep, i) => <Episode ep={ep} key={i} />)}
       </div>
     </div>
   );
