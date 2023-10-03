@@ -24,7 +24,7 @@ let Card = ({ card }: { card: ICard }) => {
             href={card.url
               .replace("/watch", "")
               .split("/")
-              .slice(2, -1)
+              .slice(3, -1)
               .join("/")}
           >
             <h3

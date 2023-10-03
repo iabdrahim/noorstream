@@ -31,7 +31,7 @@ export default function Episodes({
     setEpisodes(null);
     let data = await new provider.class().loadSeason(s.url);
     if (data) {
-      setEpisodes(data.episodes);
+      setEpisodes(data.episodes?.reverse());
       setDownloadSeason(data.downloadList);
     }
   };
@@ -57,7 +57,7 @@ export default function Episodes({
           <MdArrowDropDown />
           {seasonName}
           {dropS && (
-            <div className="servers absolute top-11 left-2/4 -translate-x-2/4 flex border bg-[#0d0d0d] border-[#222] rounded-xl gap-2 p-2 flex-col w-64 ">
+            <div className="servers absolute top-11 left-2/4 -translate-x-2/4 flex border bg-[#0d0d0d] border-[#222] rounded-xl gap-2 p-2 flex-col w-64 max-md:fixed max-md:bottom-0 max-md:w-full max-md:h-64 max-md:transition-all max-md:p-2">
               {seasons?.map((s, i) => (
                 <button
                   dir="auto"
@@ -81,7 +81,7 @@ export default function Episodes({
             <FiDownload />
             تحميل الموسم كاملا
             {dropDS && (
-              <div className="servers absolute top-11 z-10 left-2/4 -translate-x-2/4 flex border bg-[#0d0d0d] border-[#222] rounded-xl gap-2 p-2 flex-col w-64 ">
+              <div className="servers absolute top-11 z-10 left-2/4 -translate-x-2/4 flex border bg-[#0d0d0d] border-[#222] rounded-xl gap-2 p-2 flex-col w-64 max-md:fixed max-md:bottom-0 max-md:w-full max-md:h-64 max-md:transition-all max-md:p-2">
                 {DownloadSeason?.map((s, i) => (
                   <a href={s.url} target="_blank" key={i}>
                     <button

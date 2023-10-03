@@ -52,7 +52,7 @@ const Episode = ({ ep }: { ep: { name: string; url: string } }) => {
           <FiDownload size={22} className="cursor-pointer" />
 
           {drop && (
-            <div className="servers z-10 max-md:left-0 max-md:translate-x-0 absolute bottom-11 left-2/4 -translate-x-2/4 flex border bg-[#0d0d0d] border-[#222] rounded-xl gap-2 p-2 flex-col w-64 ">
+            <div className="servers z-10 max-md:left-0 max-md:translate-x-0 absolute bottom-11 left-2/4 -translate-x-2/4 flex border bg-[#0d0d0d] border-[#222] rounded-xl gap-2 p-2 flex-col w-64 max-md:fixed max-md:bottom-0 max-md:w-full max-md:h-64 max-md:transition-all max-md:p-2">
               {DownloadList?.map((d, i) => (
                 <a href={d.url} key={i} target="_blank">
                   <button

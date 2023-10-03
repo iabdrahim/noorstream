@@ -33,7 +33,10 @@ export default function Player({
             <MdArrowDropDown />
             سرفرات المشاهدة
             {drop && (
-              <div className="servers absolute top-11 left-2/4 -translate-x-2/4 flex border bg-[#0d0d0d] border-[#222] rounded-xl gap-2 p-2 flex-col w-64 ">
+              <div className="servers absolute top-11 left-2/4 -translate-x-2/4 flex border bg-[#0d0d0d] border-[#222] rounded-xl gap-2 p-2 flex-col w-64 max-md:fixed max-md:bottom-0 max-md:w-full max-md:h-64 max-md:transition-all max-md:p-2 pt-2">
+                <div className="close max-md:block hidden p-2 top-2 right-2 ">
+                  <MdClose />
+                </div>{" "}
                 {servers.map((s, i) => (
                   <button
                     dir="auto"
@@ -54,7 +57,7 @@ export default function Player({
           </div>
         </div>
       ) : (
-        <p>loading</p>
+        <div className="loading z-50 bg-[#222] w-40 h-40 rounded-2xl flex items-center justify-center"></div>
       )}
     </div>
   );
