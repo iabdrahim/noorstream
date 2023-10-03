@@ -3,9 +3,10 @@
 import { FaCirclePlay } from "react-icons/fa6";
 import { FiDownload } from "react-icons/fi";
 import { useContext, useEffect, useState } from "react";
-import { MdArrowDropDown } from "react-icons/md";
+import { MdArrowDropDown, MdClose } from "react-icons/md";
 import { providerContext } from "@/context/providers";
 import Episode from "../ui/epsiode";
+import DropMenu from "../ui/dropmenu";
 export default function Episodes({
   seasons,
   episodesDefault,
@@ -57,7 +58,7 @@ export default function Episodes({
           <MdArrowDropDown />
           {seasonName}
           {dropS && (
-            <div className="servers absolute top-11 left-2/4 -translate-x-2/4 flex border bg-[#0d0d0d] border-[#222] rounded-xl gap-2 p-2 flex-col w-64 max-md:fixed max-md:bottom-0 max-md:w-full max-md:h-64 max-md:transition-all max-md:p-2">
+            <DropMenu setDrop={setDropS}>
               {seasons?.map((s, i) => (
                 <button
                   dir="auto"
@@ -70,7 +71,7 @@ export default function Episodes({
                   {s.name}
                 </button>
               ))}
-            </div>
+            </DropMenu>
           )}
         </button>
         {DownloadSeason && (
@@ -81,7 +82,7 @@ export default function Episodes({
             <FiDownload />
             تحميل الموسم كاملا
             {dropDS && (
-              <div className="servers absolute top-11 z-10 left-2/4 -translate-x-2/4 flex border bg-[#0d0d0d] border-[#222] rounded-xl gap-2 p-2 flex-col w-64 max-md:fixed max-md:bottom-0 max-md:w-full max-md:h-64 max-md:transition-all max-md:p-2">
+              <DropMenu setDrop={setDropDS}>
                 {DownloadSeason?.map((s, i) => (
                   <a href={s.url} target="_blank" key={i}>
                     <button
@@ -93,7 +94,7 @@ export default function Episodes({
                     </button>
                   </a>
                 ))}
-              </div>
+              </DropMenu>
             )}
           </button>
         )}

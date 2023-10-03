@@ -5,6 +5,7 @@ import { FiDownload } from "react-icons/fi";
 import Player from "../ui/player";
 import { IDownLoad } from "@/utils/providers/list";
 import { MdClose } from "react-icons/md";
+import DropMenu from "../ui/dropmenu";
 
 export default function Watch({
   servers,
@@ -33,10 +34,7 @@ export default function Watch({
         <FiDownload size={20} />
         تحميل
         {drop && (
-          <div className="servers z-10 absolute bottom-11 left-2/4 -translate-x-2/4 flex border bg-[#0d0d0d] border-[#222] rounded-xl gap-2 p-2 flex-col w-64 max-md:fixed max-md:bottom-0 max-md:w-full max-md:h-64 max-md:transition-all max-md:p-2">
-            <div className="close max-md:block hidden p-2 top-2 right-2 ">
-              <MdClose />
-            </div>
+          <DropMenu setDrop={setDrop}>
             {downloadList?.map((d, i) => (
               <a href={d.url} key={i} target="_blank">
                 <button
@@ -48,7 +46,7 @@ export default function Watch({
                 </button>
               </a>
             ))}
-          </div>
+          </DropMenu>
         )}
       </button>
     </div>
