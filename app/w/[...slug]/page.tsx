@@ -6,6 +6,7 @@ import Options from "@/components/single/options";
 import Watch from "@/components/single/watch";
 import { providerContext } from "@/context/providers";
 import { ISingle } from "@/utils/providers/list";
+import Spinner from "@/components/ui/spinner";
 
 export default function Page({ params }: { params: { slug: string[] } }) {
   let { provider } = useContext(providerContext);
@@ -35,7 +36,7 @@ export default function Page({ params }: { params: { slug: string[] } }) {
 
             <div className="text flex-col flex mt-[19rem] relative z-10">
               <h1 className="text-3xl font-extrabold">{data.title}</h1>
-              <div className="mt-6 flex gap-4 flex-colflex-wrap items-center">
+              <div className="mt-6 flex gap-4 flex-colflex-wrap items-center flex-wrap">
                 <span className="bg-[#181818] w-fit rounded-sm py-2 px-2 text-gray-100 font-futura font-medium text-xs capitalize">
                   {new provider.class().mainUrl.replace("https://", "")}
                 </span>
@@ -63,7 +64,7 @@ export default function Page({ params }: { params: { slug: string[] } }) {
           )}
         </div>
       ) : (
-        <h1>loading</h1>
+        <Spinner />
       )}
     </Container>
   );

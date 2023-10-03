@@ -5,97 +5,106 @@
 @import "https://fonts.cdnfonts.com/css/futura-pt";
 
 :root {
-    --foreground-rgb: 0, 0, 0;
-    --background-start-rgb: 214, 219, 220;
-    --background-end-rgb: 255, 255, 255;
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
 }
 
 @media (prefers-color-scheme: dark) {
-    :root {
-        --foreground-rgb: 255, 255, 255;
-        --background-start-rgb: 0, 0, 0;
-        --background-end-rgb: 0, 0, 0;
-    }
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
 }
 $md: "min-width: 768px";
 
 body {
-    color: rgb(var(--foreground-rgb));
-    scroll-behavior: smooth;
+  color: rgb(var(--foreground-rgb));
+  scroll-behavior: smooth;
 }
 
 nav {
-    z-index: 10;
-    .logo svg {
-        @media not all and ($md) {
-            width: 98px;
-            height: 70px;
-        }
+  z-index: 10;
+  .logo svg {
+    @media not all and ($md) {
+      width: 98px;
+      height: 70px;
     }
+  }
 }
 
 html.dark {
-    #nprogress .bar {
-        background: white !important;
-    }
+  #nprogress .bar {
+    background: white !important;
+  }
 }
 html.light {
-    #nprogress .bar {
-        background: black !important;
-    }
+  #nprogress .bar {
+    background: black !important;
+  }
 }
 
 @layer base {
-    input[type="number"]::-webkit-inner-spin-button,
-    input[type="number"]::-webkit-outer-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 }
 
 html {
-    direction: ltr;
+  direction: ltr;
 }
 
 html[lang="ar"] {
-    direction: rtl;
+  direction: rtl;
 }
 
 main.grid.cards {
-    grid-template-columns: repeat(auto-fill, minmax(14em, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(14em, 1fr));
 }
 
 .font-futura {
-    font-family: "Futura PT", sans-serif !important;
+  font-family: "Futura PT", sans-serif !important;
 }
 
 .cards .card {
-    animation: Pop 1s all;
+  animation: Pop 1s all;
 }
 
 @keyframes Pop {
-    from {
-        transform: scale(0.5);
-    }
-    to {
-        transform: scale(1);
-    }
+  from {
+    transform: scale(0.5);
+  }
+  to {
+    transform: scale(1);
+  }
 }
 .shadow-textVisible {
-    box-shadow: 0px -71px 50px 6px rgba(0, 0, 0, 0.5) inset;
+  box-shadow: 0px -71px 50px 6px rgba(0, 0, 0, 0.5) inset;
 }
 
-.shadow-poster{
-    box-shadow: 0px -157px 120px 10px rgba(0, 0, 0, 1) inset;
+.shadow-poster {
+  box-shadow: 0px -157px 120px 10px rgba(0, 0, 0, 1) inset;
 }
 
-.shadow-actionsFooter{
-    box-shadow: 0px -71px 50px 6px rgba(0, 0, 0, 0.5) inset;
-
+.shadow-actionsFooter {
+  box-shadow: 0px -71px 50px 6px rgba(0, 0, 0, 0.5) inset;
 }
 
 @media not all and (min-width: 768px) {
-  .max-md\:h-64 {
-    height: 16rem/* 256px */;
+  .drop .servers {
+    height: 0px;
+    animation: Anime 0.7s linear forwards;
+  }
+}
+
+@keyframes Anime {
+  1% {
+    height: 0px;
+  }
+  100% {
+    height: fit-content;
   }
 }
