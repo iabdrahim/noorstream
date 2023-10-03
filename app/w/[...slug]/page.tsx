@@ -15,7 +15,6 @@ export default function Page({ params }: { params: { slug: string[] } }) {
     let get = async () => {
       let Class = new provider.class();
       let res = await Class.load(`${Class.mainUrl}/${params.slug.join("/")}`);
-      console.log(res);
       setData(res);
     };
     get();

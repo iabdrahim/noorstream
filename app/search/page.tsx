@@ -16,9 +16,7 @@ function Search({
   useEffect(() => {
     let get = async () => {
       let Class = new provider.class();
-      console.log(searchParams?.q);
       let res = await Class.search(searchParams?.q || "");
-      console.log(res);
       setData(res);
     };
     get();
