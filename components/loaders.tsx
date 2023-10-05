@@ -37,6 +37,18 @@ const FullPageLoader = ({ ...rest }) => (
     <rect x="0" y="170" rx="4" ry="4" width="60" height="14" />
   </ContentLoader>
 );
+const EpisodeLoader = ({ ...rest }) => (
+  <ContentLoader
+    backgroundColor="#0d0d0d"
+    foregroundColor="#191919"
+    viewBox="0 0 261 331"
+    rtl
+    {...rest}
+  >
+    {/* Sub info */}
+    <rect x="0" y="170" rx="4" ry="4" width="260" height="16" />
+  </ContentLoader>
+);
 
 export default CardLoader;
-export { FullPageLoader };
+export { FullPageLoader, EpisodeLoader };

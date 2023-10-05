@@ -13,13 +13,13 @@ function Search({
   searchParams?: { [key: string]: string | undefined };
 }) {
   let { provider } = useContext(providerContext);
-   let { data, isLoading } = useQuery<ICard[] | null>(
+  let { data, isLoading } = useQuery<ICard[] | null>(
     "moviesSearch",
     async () => await new provider.class().search(searchParams?.q || "")
   );
   return (
     <Container>
-      <Cards data={data || null} loading={isLoading} />
+      <Cards data={data} loading={isLoading} />
     </Container>
   );
 }

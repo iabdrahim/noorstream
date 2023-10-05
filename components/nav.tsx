@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useContext, useState } from "react";
+import { FormEvent, useContext } from "react";
 import { useRouter } from "next/navigation";
 import { tajawal } from "@/app/layout";
 import { BiSearch } from "react-icons/bi";

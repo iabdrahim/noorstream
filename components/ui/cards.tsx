@@ -8,21 +8,23 @@ let Cards = ({
   data,
   loading,
 }: {
-  data: ICard[] | null;
+  data: ICard[] | null | undefined;
   loading?: boolean;
 }) => {
   return (
     <main className="cards mt-8 grid overflow-hidden p-2 mb-4 gap-4 items-start w-full">
-      {/* {data && data.slice(0, 16).map((m, i) => <Card key={i} card={m} />)}
-      {loading && ( */}
-      <>
-        <CardLoader />
-        <CardLoader />
-        <CardLoader />
-        <CardLoader />
-        <CardLoader />
-      </>
-      {/* )} */}
+      {data && data.slice(0, 16).map((m, i) => <Card key={i} card={m} />)}
+      {loading && (
+        <>
+          <CardLoader />
+          <CardLoader />
+          <CardLoader />
+          <CardLoader />
+          <CardLoader />
+          <CardLoader />
+          <CardLoader />
+        </>
+      )}
     </main>
   );
 };

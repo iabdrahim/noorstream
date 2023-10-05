@@ -11,5 +11,5 @@ export default function Hero() {
     "movies",
     async () => await new provider.class().getMainPage()
   );
-  return <Cards data={data || null} loading={isLoading} />;
+  return <Cards data={data} loading={isLoading} />;
 }

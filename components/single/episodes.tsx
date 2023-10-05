@@ -7,6 +7,7 @@ import { MdArrowDropDown, MdClose } from "react-icons/md";
 import { providerContext } from "@/context/providers";
 import Episode from "../ui/epsiode";
 import DropMenu from "../ui/dropmenu";
+import { EpisodeLoader } from "../loaders";
 export default function Episodes({
   seasons,
   episodesDefault,
@@ -36,13 +37,16 @@ export default function Episodes({
       setDownloadSeason(data.downloadList);
     }
   };
+  let [loading, setLoad] = useState(true);
   useEffect(() => {
     let get = async () => {
       if (!seasons) return;
+      setLoad(true);
       let data = await new provider.class().loadSeason(seasons[0].url);
       if (data) {
         setDownloadSeason(data.downloadList);
       }
+      setLoad(false);
     };
     get();
   }, [seasons]);
@@ -102,6 +106,15 @@ export default function Episodes({
       <h2 className="w-full text-xl font-bold">الحلقات:</h2>
       <div className="flex gap-4 mt-2 w-full flex-col">
         {episodes && episodes.map((ep, i) => <Episode ep={ep} key={i} />)}
+        {loading && (
+          <>
+            <EpisodeLoader />
+            <EpisodeLoader />
+            <EpisodeLoader />
+            <EpisodeLoader />
+            <EpisodeLoader />
+          </>
+        )}
       </div>
     </div>
   );

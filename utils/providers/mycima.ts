@@ -143,7 +143,7 @@ export default class MyCima {
     });
     return { watchServersList, downloadList };
   }
-  async search(query: string, type?: string): Promise<ICard[] | null> {
+  async search(query: string): Promise<ICard[] | null> {
     const q = query.replace(/ /g, "%20");
     const result: ICard[] = [];
 
@@ -162,7 +162,6 @@ export default class MyCima {
       console.error(err.message);
       return null;
     }
-    console.log(promise);
 
     for (const response of promise) {
       const $ = load(response?.data);
@@ -176,6 +175,7 @@ export default class MyCima {
         }
       });
     }
+    console.log(result);
 
     return result
       .slice(0, 36)
