@@ -3,20 +3,23 @@
 
 import MovieProvider from "@/context/providers";
 import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
-import { useState, useEffect } from "react";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
-    return (
-        <MovieProvider>
-            {children}
-            <ProgressBar
-                height="5px"
-                color="#ffffff"
-                options={{ showSpinner: false }}
-                shallowRouting
-            />
-        </MovieProvider>
-    );
+  const queryClient = new QueryClient();
+  return (
+    <QueryClientProvider client={queryClient}>
+      <MovieProvider>
+        {children}
+        <ProgressBar
+          height="5px"
+          color="#ffffff"
+          options={{ showSpinner: false }}
+          shallowRouting
+        />
+      </MovieProvider>
+    </QueryClientProvider>
+  );
 };
 
 export default Providers;

@@ -67,17 +67,17 @@ export default class MyCima {
       year: string;
     }[] = [];
     const urls = [`${this.mainUrl}/seriestv/new/`, `${this.mainUrl}/movies/`];
-
-    for (let url of urls) {
-      let response = null;
-      try {
-        let res = await axios.get("/api/url?url=" + url);
-        response = res.data;
-      } catch (err: any) {
-        console.error(err.message);
-        return null;
-      }
-      const $ = load(response);
+    let res = axios.get("/api/url?url=" + urls[0]);
+    let res1 = axios.get("/api/url?url=" + urls[1]);
+    let promise;
+    try {
+      promise = await Promise.all([res, res1]);
+    } catch (err: any) {
+      console.error(err.message);
+      return null;
+    }
+    for (let response of promise) {
+      const $ = load(response.data);
 
       $("div.Grid--WecimaPosts div.GridItem").each((i: number, el: Element) => {
         const searchResponse = this.toSearchResponse($(el));
@@ -86,6 +86,7 @@ export default class MyCima {
         }
       });
     }
+    console.log(list);
 
     list = list.sort((a, b) => Math.random() - 0.5);
     return list;
@@ -184,8 +185,9 @@ export default class MyCima {
       )
       .sort((a, b) => a.title.localeCompare(b.title));
   }
-  async load(url: string): Promise<ISingle | null> {
+  async load(slug: string): Promise<ISingle | null> {
     let response = null;
+    let url = this.mainUrl + "/" + slug;
     try {
       response = await axios.get("/api/url?url=" + url);
     } catch (err: any) {

@@ -8,18 +8,14 @@ import { providerContext } from "@/context/providers";
 import { ISingle } from "@/utils/providers/list";
 import Spinner from "@/components/ui/spinner";
 import { FullPageLoader } from "@/components/loaders";
+import { useQuery } from "react-query";
 
 export default function Page({ params }: { params: { slug: string[] } }) {
   let { provider } = useContext(providerContext);
-  let [data, setData] = useState<ISingle | null>(null);
-  useEffect(() => {
-    let get = async () => {
-      let Class = new provider.class();
-      let res = await Class.load(`${Class.mainUrl}/${params.slug.join("/")}`);
-      // setData(res);
-    };
-    get();
-  }, []);
+  let { data, isLoading } = useQuery<ISingle | null>(
+    "movie",
+    async () => await new provider.class().load(params.slug.join("/"))
+  );
   return (
     <Container>
       {data?.title ? (
