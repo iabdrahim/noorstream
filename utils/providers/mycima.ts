@@ -11,7 +11,7 @@ export default class MyCima {
     this.lang = "ar";
     this.mainUrl = "https://weciimaa.online";
     this.name = "mycima";
-    this.supportedTypes = ["TvSeries", "Movie", "Anime"];
+    this.supportedTypes = ["series", "movies", "animes"];
   }
   //utils {
 
@@ -142,7 +142,7 @@ export default class MyCima {
     });
     return { watchServersList, downloadList };
   }
-  async search(query: string): Promise<ICard[] | null> {
+  async search(query: string, type?: string): Promise<ICard[] | null> {
     const q = query.replace(/ /g, "%20");
     const result: ICard[] = [];
 
@@ -151,15 +151,19 @@ export default class MyCima {
       `${this.mainUrl}/search/${q}/list/series/`,
       `${this.mainUrl}/search/${q}/list/anime/`,
     ];
+    let res = axios.get("/api/url?url=" + searchUrls[0]);
+    let res1 = axios.get("/api/url?url=" + searchUrls[1]);
+    let res2 = axios.get("/api/url?url=" + searchUrls[2]);
+    let promise;
+    try {
+      promise = await Promise.all([res, res1, res2]);
+    } catch (err: any) {
+      console.error(err.message);
+      return null;
+    }
+    console.log(promise);
 
-    for (const url of searchUrls) {
-      let response = null;
-      try {
-        response = await axios.get("/api/url?url=" + url);
-      } catch (err: any) {
-        console.error(err.message);
-        return null;
-      }
+    for (const response of promise) {
       const $ = load(response?.data);
 
       $("div.Grid--WecimaPosts div.GridItem").each((i: number, el: Element) => {
@@ -173,6 +177,7 @@ export default class MyCima {
     }
 
     return result
+      .slice(0, 36)
       .filter(
         (value, index, self) =>
           self.findIndex((item) => item.title === value.title) === index

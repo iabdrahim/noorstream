@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { MdClose, MdArrowDropDown } from "react-icons/md";
 import Spinner from "./spinner";
+import DropMenu from "./dropmenu";
 
 export default function Player({
   servers,
@@ -14,15 +15,15 @@ export default function Player({
   let [drop, setDrop] = useState(false);
   let [iframeInx, setIframe] = useState(0);
   return (
-    <div className="contaier left-0 z-40 top-0 w-full h-screen fixed flex justify-center items-center">
+    <div className="card left-0 z-40 top-0 w-full h-screen fixed flex justify-center items-center">
       <div
         className="bg backdrop-blur-sm z-40 bg-black bg-opacity-20 w-full h-full absolute left-0 top-0"
         onClick={() => setWatchPop(false)}
       ></div>
       {servers ? (
-        <div className="watch z-50 fixed max-w-5xl w-full h-[92vh] border-2 border-[#222] rounded-xl gap-4 flex flex-col justify-center bg-[#0D0D0D] p-4">
+        <div className="watch z-50 fixed max-w-5xl w-full h-[92vh] max-md:h-screen max-md:w-full border-2 border-[#222] rounded-xl gap-4 flex flex-col justify-center bg-[#0D0D0D] p-4">
           <div
-            className="absolute right-4 top-4 rounded-full backdrop:blur-sm p-3 bg-gray-900 bg-opacity-25 cursor-pointer hover:bg-gray-700"
+            className="absolute right-4 top-4 rounded-full backdrop:blur-sm p-3 bg-[#1a1a1a] bg-opacity-25 cursor-pointer hover:bg-[#222]"
             onClick={() => setWatchPop(false)}
           >
             <MdClose size={18} />
@@ -34,13 +35,7 @@ export default function Player({
             <MdArrowDropDown />
             سرفرات المشاهدة
             {drop && (
-              <div className="servers absolute top-11 left-2/4 -translate-x-2/4 flex border bg-[#0d0d0d] border-[#222] rounded-xl gap-2 p-2 flex-col w-64 max-md:fixed max-md:bottom-0 max-md:w-full max-md:h-64 max-md:transition-all max-md:p-2 pt-2">
-                <div
-                  className="close max-md:block hidden p-2 top-2 right-2 "
-                  onClick={() => setDrop(false)}
-                >
-                  <MdClose />
-                </div>
+              <DropMenu setDrop={setDrop}>
                 {servers.map((s, i) => (
                   <button
                     dir="auto"
@@ -53,7 +48,7 @@ export default function Player({
                     {s.split(".")[0].replace("https://", "")}
                   </button>
                 ))}
-              </div>
+              </DropMenu>
             )}
           </button>
           <div className="video w-full h-full max-md:max-h-[30vh] rounded-xl bg-[#222] ">

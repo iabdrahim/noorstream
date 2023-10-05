@@ -13,17 +13,29 @@ function Search({
 }) {
   let { provider } = useContext(providerContext);
   let [data, setData] = useState<ICard[] | null>(null);
+  let [loading, setLoading] = useState<boolean>(true);
   useEffect(() => {
     let get = async () => {
       let Class = new provider.class();
-      let res = await Class.search(searchParams?.q || "");
-      setData(res);
+      let res = Class.search(searchParams?.q || "");
+      let res1 = Class.search(searchParams?.q || "", "anime");
+      let res2 = Class.search(searchParams?.q || "", "series");
+      let promise = await Promise.all([res, res1, res2]);
+      console.log(promise);
+      let arr: ICard[] = [];
+      // arr = [].concat(...promise);
+      promise.forEach((ar) => ar != null && [arr, ...ar.slice(0, 12)]);
+      console.log(arr);
+      setData(arr);
+      if (Array.isArray(promise)) {
+        setLoading(false);
+      }
     };
     get();
   }, []);
   return (
     <Container>
-      <Cards data={data} />
+      <Cards data={data} loading={loading} />
     </Container>
   );
 }

@@ -19,7 +19,7 @@ export default function Nav() {
   return (
     <>
       <nav
-        className="w-full sticky left-0 py-2 max-md:py-1 top-0 h-fit min-h-16 backdrop-blur-md flex justify-between z-20 items-center bg-black bg-opacity-10 mb-8 max-md:mb-10"
+        className="w-full sticky left-0 py-2 max-md:py-1 top-0 h-fit min-h-16 backdrop-blur-md flex justify-between z-20 items-center bg-black bg-opacity-10 mb-8 max-md:mb-2"
         id="sticky-nav"
       >
         <div className="w-full flex gap-4 max-md:gap-1 items-center">

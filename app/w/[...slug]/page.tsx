@@ -7,6 +7,7 @@ import Watch from "@/components/single/watch";
 import { providerContext } from "@/context/providers";
 import { ISingle } from "@/utils/providers/list";
 import Spinner from "@/components/ui/spinner";
+import { FullPageLoader } from "@/components/loaders";
 
 export default function Page({ params }: { params: { slug: string[] } }) {
   let { provider } = useContext(providerContext);
@@ -15,7 +16,7 @@ export default function Page({ params }: { params: { slug: string[] } }) {
     let get = async () => {
       let Class = new provider.class();
       let res = await Class.load(`${Class.mainUrl}/${params.slug.join("/")}`);
-      setData(res);
+      // setData(res);
     };
     get();
   }, []);
@@ -63,7 +64,7 @@ export default function Page({ params }: { params: { slug: string[] } }) {
           )}
         </div>
       ) : (
-        <Spinner />
+        <FullPageLoader />
       )}
     </Container>
   );
