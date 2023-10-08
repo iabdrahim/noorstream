@@ -86,9 +86,8 @@ export default class MyCima {
         }
       });
     }
-    console.log(list);
 
-    list = list.sort((a, b) => Math.random() - 0.5);
+    list = list.sort((a, b) => Math.random() - 0.5).slice(0, 36);
     return list;
   }
   async loadSeason(url: string) {
@@ -146,7 +145,7 @@ export default class MyCima {
   async search(query: string): Promise<ICard[] | null> {
     const q = query.replace(/ /g, "%20");
     const result: ICard[] = [];
-
+    console.log("starting");
     const searchUrls = [
       `${this.mainUrl}/search/${q}`,
       `${this.mainUrl}/search/${q}/list/series/`,
@@ -157,28 +156,32 @@ export default class MyCima {
     let res2 = axios.get("/api/url?url=" + searchUrls[2]);
     let promise;
     try {
+      let s = Date.now();
       promise = await Promise.all([res, res1, res2]);
+      console.log("waiting time: ", Date.now() - s);
     } catch (err: any) {
       console.error(err.message);
       return null;
     }
+    let s = Date.now();
 
     for (const response of promise) {
-      const $ = load(response?.data);
+      if (!response) continue;
+      const $ = load(response.data);
 
       $("div.Grid--WecimaPosts div.GridItem").each((i: number, el: Element) => {
         if (!$(el).text().includes("اعلان")) {
           const searchResponse = this.toSearchResponse($(el));
           if (searchResponse) {
             result.push(searchResponse as any);
+            if (i >= 12) return;
           }
         }
       });
     }
-    console.log(result);
+    console.log("parsing time: ", Date.now() - s);
 
     return result
-      .slice(0, 36)
       .filter(
         (value, index, self) =>
           self.findIndex((item) => item.title === value.title) === index

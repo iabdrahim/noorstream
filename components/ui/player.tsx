@@ -35,7 +35,7 @@ export default function Player({
             <MdArrowDropDown />
             سرفرات المشاهدة
             {drop && (
-              <DropMenu setDrop={setDrop}>
+              <DropMenu setDrop={setDrop} isBottom>
                 {servers.map((s, i) => (
                   <button
                     dir="auto"

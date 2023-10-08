@@ -1,4 +1,4 @@
-import "./globals.scss";
+import "./globals.css";
 import type { Metadata } from "next";
 import { Tajawal, Noto_Sans_Arabic } from "next/font/google";
 import Providers from "../components/provider";

@@ -2,6 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import "https://fonts.cdnfonts.com/css/futura-pt";
 
 :root {
@@ -17,22 +46,12 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
-$md: "min-width: 768px";
 
 body {
   color: rgb(var(--foreground-rgb));
   scroll-behavior: smooth;
 }
 
-nav {
-  z-index: 10;
-  .logo svg {
-    @media not all and ($md) {
-      width: 98px;
-      height: 70px;
-    }
-  }
-}
 
 html.dark {
   #nprogress .bar {

@@ -41,7 +41,7 @@ const EpisodeLoader = ({ ...rest }) => (
   <ContentLoader
     backgroundColor="#0d0d0d"
     foregroundColor="#191919"
-    viewBox="0 0 261 331"
+    viewBox="0 0 261 20"
     rtl
     {...rest}
   >

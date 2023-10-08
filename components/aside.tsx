@@ -35,7 +35,7 @@ export default function Aside() {
           <BiTime />
           ما شاهدته مؤخرا
         </h3>
-        <div
+        {/* <div
           className="movie relative w-full h-48 rounded-xl flex justify-between items-end shadow-textVisible px-4 py-4 overflow-hidden"
           dir="auto"
         >
@@ -60,31 +60,7 @@ export default function Aside() {
             </div>
           </Link>
         </div>
-        <div
-          className="movie relative w-full h-48 rounded-xl flex justify-between items-end shadow-textVisible px-4 py-4 overflow-hidden"
-          dir="auto"
-        >
-          <div className="absolute right-4 top-2 rounded-full backdrop:blur-sm p-2 bg-black bg-opacity-25 cursor-pointer">
-            <MdClose size={18} />
-          </div>
-          <img
-            className="w-full cover-object h-full pointer-events-none blur-[2px] left-0 top-0 absolute -z-10"
-            src="https://wallpapers.com/images/hd/breaking-bad-series-cover-7lj0pi78smszhiqt.jpg"
-          />
-          <div className="flex justify-between items-start flex-col gap-1">
-            <div className="text-white text-[22px] font-bold font-futura tex">
-              Breacking Bad
-            </div>
-            <div className="text-neutral-100 text-xs font-bold font-futura text-ellipsis">
-              Episode 1
-            </div>
-          </div>
-          <Link href={"/provider/bad"}>
-            <div className="w-11 cursor-pointer flex justify-center items-center h-11 bg-white rounded-full border text-black">
-              <BiPlay size={27} />
-            </div>
-          </Link>
-        </div>
+        */}
       </div>
     </aside>
   );
