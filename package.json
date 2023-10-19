@@ -17,12 +17,14 @@
     "react-content-loader": "^6.2.1",
     "react-dom": "^18",
     "react-icons": "^4.11.0",
-    "react-query": "^3.39.3"
+    "react-query": "^3.39.3",
+    "react-transition-group": "^4.4.5"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/react-transition-group": "^4.4.8",
     "autoprefixer": "^10",
     "postcss": "^8",
     "tailwindcss": "^3",
