@@ -57,43 +57,49 @@ let getSearch = (provider: { name: string; url: string }, q: string) => {
     );
     return { data, isLoading, error, refetch };
 };
-let getEpisode = (provider: { name: string; url: string }, slug: string) => {
-    let { data, isLoading, error, refetch } = useQuery(
-        "episode",
-        async () =>
-            (
-                await axios.get(
-                    BASE_URL +
-                        "/data/" +
-                        provider.name +
-                        "/episode?Url=" +
-                        provider.url +
-                        "/" +
-                        slug,
-                    config
-                )
-            ).data
-    );
-    return { data, isLoading, error, refetch };
+let getEpisode = async (
+    provider: { name: string; url: string },
+    slug: string
+) => {
+    // let { data, isLoading, error, refetch } = useQuery(
+    //     "episode",
+    // async () =>
+    let data = (
+        await axios.get(
+            BASE_URL +
+                "/data/" +
+                provider.name +
+                "/episode?Url=" +
+                provider.url +
+                "/" +
+                slug,
+            config
+        )
+    ).data;
+    // );
+    return data;
 };
-let getSeason = (provider: { name: string; url: string }, slug: string) => {
-    let { data, isLoading, error, refetch } = useQuery(
-        "season",
-        async () =>
-            (
-                await axios.get(
-                    BASE_URL +
-                        "/data/" +
-                        provider.name +
-                        "/season?Url=" +
-                        provider.url +
-                        "/" +
-                        slug,
-                    config
-                )
-            ).data
-    );
-    return { data, isLoading, error, refetch };
+let getSeason = async (
+    provider: { name: string; url: string },
+    slug: string
+) => {
+    // let { data, isLoading, error, refetch } = useQuery(
+    //     "season",
+    //     async () =>
+    let data = (
+        await axios.get(
+            BASE_URL +
+                "/data/" +
+                provider.name +
+                "/season?Url=" +
+                provider.url +
+                "/" +
+                slug,
+            config
+        )
+    ).data;
+    // );
+    return data;
 };
 export {
     getProviders,

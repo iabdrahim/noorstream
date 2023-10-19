@@ -8,6 +8,8 @@ import { providerContext } from "@/context/providers";
 import Episode from "../ui/epsiode";
 import DropMenu from "../ui/dropmenu";
 import { EpisodeLoader } from "../loaders";
+import axios from "axios";
+import { getEpisode, getSeason } from "@/utils/api";
 export default function Episodes({
     seasons,
     episodesDefault,
@@ -31,7 +33,7 @@ export default function Episodes({
     let handleChangeSeason = async (s: { name: string; url: string }) => {
         setSeasonN(s.name);
         setEpisodes(null);
-        let data = await new provider.class().loadSeason(s.url);
+        let data = await getSeason(provider, s.url);
         if (data) {
             setEpisodes(data.episodes?.reverse());
             setDownloadSeason(data.downloadList);
@@ -42,7 +44,7 @@ export default function Episodes({
         let get = async () => {
             if (!seasons) return;
             setLoad(true);
-            let data = await new provider.class().loadSeason();
+            let data = await getSeason(provider, seasons[0].url);
             if (data) {
                 setDownloadSeason(data.downloadList);
             }
