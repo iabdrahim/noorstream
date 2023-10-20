@@ -12,13 +12,14 @@ export default function MovieProvider({
 }: {
     children: React.ReactNode;
 }) {
-    let [provider, setProviderC] = useState({ name: "mycima", url: "" });
+    let [provider, setProviderC] = useState({ name: "", url: "" });
 
     let [isLoad, isDataLoad] = useState(false);
     useEffect(() => {
-        if (localStorage.getItem("providerName")) {
-            let providerName = localStorage.getItem("providerName") || "";
-            setProviderC({ ...provider, name: providerName });
+        if (localStorage.getItem("Provider")) {
+            let providerS = localStorage.getItem("Provider") || "{}";
+            let obj = JSON.parse(providerS);
+            setProviderC(obj);
         }
         isDataLoad(true);
     }, []);
@@ -26,7 +27,7 @@ export default function MovieProvider({
     // set localstorage
     useEffect(() => {
         if (!isLoad) return;
-        localStorage.setItem("providerName", provider.name);
+        localStorage.setItem("Provider", JSON.stringify(provider));
     }, [provider, isLoad]);
 
     let setProvider = (providerName: string, url: string) => {

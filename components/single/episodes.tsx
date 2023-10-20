@@ -30,25 +30,25 @@ export default function Episodes({
           }[]
         | null
     >(null);
+    let [loading, setLoad] = useState(true);
     let handleChangeSeason = async (s: { name: string; url: string }) => {
         setSeasonN(s.name);
         setEpisodes(null);
+        setLoad(true);
         let data = await getSeason(provider, s.url);
+        setLoad(false);
         if (data) {
             setEpisodes(data.episodes?.reverse());
             setDownloadSeason(data.downloadList);
         }
     };
-    let [loading, setLoad] = useState(true);
     useEffect(() => {
         let get = async () => {
             if (!seasons) return;
-            setLoad(true);
             let data = await getSeason(provider, seasons[0].url);
             if (data) {
                 setDownloadSeason(data.downloadList);
             }
-            setLoad(false);
         };
         get();
     }, [seasons]);

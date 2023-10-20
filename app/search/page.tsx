@@ -3,6 +3,7 @@
 import Container from "@/components/Container";
 import Cards from "@/components/ui/cards";
 import { providerContext } from "@/context/providers";
+import { getSearch } from "@/utils/api";
 import { ICard } from "@/utils/providers/list";
 import axios from "axios";
 import React, { useContext, useState, useEffect } from "react";
@@ -14,10 +15,7 @@ function Search({
     searchParams?: { [key: string]: string | undefined };
 }) {
     let { provider } = useContext(providerContext);
-    let { data, isLoading } = useQuery<ICard[] | null>(
-        "moviesSearch",
-        async () => (await axios.get("https://k.com")).data
-    );
+    let { data, isLoading } = getSearch(provider, searchParams?.q || "");
     return (
         <Container>
             <Cards data={data} loading={isLoading} />

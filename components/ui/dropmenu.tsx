@@ -17,7 +17,7 @@ let DropMenu = ({
     return (
         <div
             className={`servers z-10 max-md:translate-x-0 absolute ${
-                isBottom ? "top-10" : "bottom-10"
+                isBottom ? "md:top-10" : "md:bottom-10"
             } max-md:left-0 left-2/4 -translate-x-2/4 flex border bg-[#0d0d0d] border-[#222] rounded-xl gap-2 p-2 flex-col w-64 max-md:fixed max-md:bottom-0 max-md:w-full max-md:min-h-64 max-md:h-fit max-md:transition-all max-md:py-4 overflow-auto min-h-[16rem] ${classNames}`}
         >
             <button

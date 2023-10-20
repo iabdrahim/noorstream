@@ -8,30 +8,34 @@ const config = {
         "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
     },
 };
-let BASE_URL = "https://noorstream-api.onrender.com";
+export let API_BASE_URL = "https://noorstream-api.onrender.com";
 
 let getProviders = () => {
     let { data, isLoading, error, refetch } = useQuery(
         "providers",
-        async () => (await axios.get(BASE_URL + "/data", config)).data
+        async () => (await axios.get(API_BASE_URL + "/data", config)).data
     );
     return { data: data?.providers || null, isLoading, error, refetch };
 };
 let getHomePage = (provider: { name: string; url: string }) => {
+    if (!provider.name) return { data: null, isLoading: false };
     let { data, isLoading, error, refetch } = useQuery(
         "home",
         async () =>
-            (await axios.get(BASE_URL + "/data/" + provider.name, config)).data
+            (await axios.get(API_BASE_URL + "/data/" + provider.name, config))
+                .data
     );
     return { data, isLoading, error, refetch };
 };
 let getSinglePage = (provider: { name: string; url: string }, slug: string) => {
+    if (!provider.name) return { data: null, isLoading: false };
+
     let { data, isLoading, error, refetch } = useQuery(
         "singlePage",
         async () =>
             (
                 await axios.get(
-                    BASE_URL +
+                    API_BASE_URL +
                         "/data/" +
                         provider.name +
                         "?Url=" +
@@ -45,12 +49,14 @@ let getSinglePage = (provider: { name: string; url: string }, slug: string) => {
     return { data, isLoading, error, refetch };
 };
 let getSearch = (provider: { name: string; url: string }, q: string) => {
+    if (!provider.name) return { data: null, isLoading: false };
+
     let { data, isLoading, error, refetch } = useQuery(
         "getSearch",
         async () =>
             (
                 await axios.get(
-                    BASE_URL + "/data/" + provider.name + "/search?q=" + q,
+                    API_BASE_URL + "/data/" + provider.name + "/search?q=" + q,
                     config
                 )
             ).data
@@ -59,21 +65,14 @@ let getSearch = (provider: { name: string; url: string }, q: string) => {
 };
 let getEpisode = async (
     provider: { name: string; url: string },
-    slug: string
+    url: string
 ) => {
     // let { data, isLoading, error, refetch } = useQuery(
     //     "episode",
     // async () =>
     let data = (
         await axios.get(
-            BASE_URL +
-                "/data/" +
-                provider.name +
-                "/episode?Url=" +
-                provider.url +
-                "/" +
-                slug,
-            config
+            API_BASE_URL + "/data/" + provider.name + "/episode?Url=" + url
         )
     ).data;
     // );
@@ -81,20 +80,14 @@ let getEpisode = async (
 };
 let getSeason = async (
     provider: { name: string; url: string },
-    slug: string
+    url: string
 ) => {
     // let { data, isLoading, error, refetch } = useQuery(
     //     "season",
     //     async () =>
     let data = (
         await axios.get(
-            BASE_URL +
-                "/data/" +
-                provider.name +
-                "/season?Url=" +
-                provider.url +
-                "/" +
-                slug,
+            API_BASE_URL + "/data/" + provider.name + "/season?Url=" + url,
             config
         )
     ).data;

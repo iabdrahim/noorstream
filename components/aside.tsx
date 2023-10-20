@@ -7,16 +7,15 @@ import {
 } from "react-icons/pi";
 import { BiCollection } from "react-icons/bi";
 import { useState } from "react";
-import { CSSTransition } from "react-transition-group";
-
+import Link from "next/link";
 export default function Aside() {
     let [showAside, setShow] = useState(false);
     return (
         <aside
-            className={`rounded-xl max-w-[18rem] sticky top-0 left-0 w-full h-screen flex flex-col items-start p-2 max-md:fixed justify-start gap-4 z-20 ${
+            className={`rounded-xl max-w-[18rem] sticky top-0 left-0 w-full h-screen flex flex-col items-start p-2 max-md:fixed justify-start gap-4 ${
                 showAside
-                    ? "max-md:max-w-xs max-md:pt-2 max-md:bg-[#0D0D0D]"
-                    : "max-md:h-full max-md:max-w-fit pt-2"
+                    ? "max-md:max-w-xs max-md:pt-2 max-md:bg-[#0D0D0D] z-20"
+                    : "max-md:h-full max-md:max-w-fit pt-2 max-md:-z-10"
             }`}
         >
             <header className="w-full flex justify-between md:mb-12 items-center">
@@ -29,7 +28,7 @@ export default function Aside() {
                         <div
                             className={`name font-futura font-medium trans flex gap-1 items-center ${
                                 !showAside &&
-                                "max-md:opacity-0 max-md:w-0 max-md:pointer-events-none"
+                                "max-md:opacity-0 z-20 max-md:w-0 max-md:pointer-events-none"
                             }`}
                         >
                             <MdArrowDropDown />
@@ -53,9 +52,11 @@ export default function Aside() {
                     !showAside && "max-md:opacity-0 max-md:pointer-events-none"
                 }`}
             >
-                <div className="btn text-black bg-white w-full rounded-full py-[0.82rem] px-4 flex gap-4 items-center font-bold cursor-pointer">
-                    <PiHouseBold size="24" /> الرئيسية
-                </div>
+                <Link href="/">
+                    <div className="btn text-black bg-white w-full rounded-full py-[0.82rem] px-4 flex gap-4 items-center font-bold cursor-pointer">
+                        <PiHouseBold size="24" /> الرئيسية
+                    </div>
+                </Link>
                 <div className="btn text-white w-full hover:bg-[#0D0D0D] rounded-full flex py-[0.82rem] px-4 gap-4 items-cente transition-all font-bold cursor-pointer">
                     <PiFilmSlateBold size="24" /> الأفلام
                 </div>
